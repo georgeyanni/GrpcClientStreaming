@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "GrpcServer";
+
+package mystream;
+
+service MyStream {
+ 
+ rpc MyStreamOperation(stream MyStreamOperationRequest) returns (MyStreamOperationResponse);
+
+}
+
+message MyStreamOperationResponse
+{
+	string ResponseMessage=1;
+}
+
+message StartRequest {
+	string BlockName=1;
+}
+
+message ChunckMsg{
+	bytes Chunck =1;
+}
+
+message MyStreamOperationRequest{
+	
+oneof Request
+{
+	StartRequest StartRequest=1;
+	ChunckMsg ChunckMsg=2;
+}
+
+
+}
